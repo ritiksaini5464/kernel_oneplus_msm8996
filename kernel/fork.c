@@ -77,8 +77,12 @@
 #include <linux/compiler.h>
 #include <linux/kcov.h>
 #include <linux/cpu_input_boost.h>
+#include <linux/livepatch.h>
+#include <linux/thread_info.h>
+#include <linux/cpufreq_times.h>
+#include <linux/scs.h>
+#include <linux/simple_lmk.h>
 #include <linux/devfreq_boost.h>
-
 #include <asm/pgtable.h>
 #include <asm/pgalloc.h>
 #include <asm/uaccess.h>
@@ -1677,10 +1681,10 @@ long do_fork(unsigned long clone_flags,
 	int trace = 0;
 	long nr;
 
-	/* Boost CPU to the max for 1250 ms when userspace launches an app */
-	if (is_zygote_pid(current->pid)) {
-		cpu_input_boost_kick_max(1250);
-		devfreq_boost_kick_max(DEVFREQ_MSM_CPUBW, 1250);
+	/* Boost DDR bus to the max for 50 ms when userspace launches an app */
+	if (task_is_zygote(current) && df_boost_within_input(1500)) {
+		devfreq_boost_kick_max(DEVFREQ_MSM_LLCCBW, 50);
+		devfreq_boost_kick_max(DEVFREQ_MSM_CPUBW, 50);
 	}
 
 	/*
