@@ -407,16 +407,6 @@ static int ashmem_mmap(struct file *file, struct vm_area_struct *vma)
 
 	prot_mask = READ_ONCE(asma->prot_mask);
 
-<<<<<<< HEAD
-		/* ... and allocate the backing shmem file */
-		vmfile = shmem_file_setup(name, asma->size, vma->vm_flags);
-		if (unlikely(IS_ERR(vmfile))) {
-			ret = PTR_ERR(vmfile);
-			goto out;
-		}
-		vmfile->f_mode |= FMODE_LSEEK;
-		asma->file = vmfile;
-=======
 	/* requested protection bits must match our allowed protection mask */
 	if (unlikely((vma->vm_flags & ~calc_vm_prot_bits(prot_mask)) &
 		     calc_vm_prot_bits(PROT_MASK)))
@@ -436,7 +426,6 @@ static int ashmem_mmap(struct file *file, struct vm_area_struct *vma)
 
 		if (do_setup && ret)
 			return ret;
->>>>>>> a5b9d06924ee... staging: android: ashmem: Get rid of the big mutex lock
 	}
 	get_file(asma->file);
 

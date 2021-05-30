@@ -4615,13 +4615,11 @@ static enum power_supply_property fg_power_props[] = {
 	POWER_SUPPLY_PROP_BATTERY_HEALTH,
 };
 
-<<<<<<< HEAD
 #define DEFALUT_BATT_TEMP 250
 #define OP_4P4V_BAT_ID  10000
 #define OP_4P35V_BAT_ID 100000
-=======
 #define FG_RATE_LIM_MS (5 * MSEC_PER_SEC)
->>>>>>> 172cf7abcb09... BACKPORT: qpnp-fg: Limit how frequently fg data can be queried
+
 
 static int fg_power_get_property(struct power_supply *psy,
 				       enum power_supply_property psp,

@@ -385,7 +385,7 @@ __setup("no_underclock", get_cpu_underclock);
 static struct cpufreq_frequency_table *cpufreq_parse_dt(struct device *dev,
 						char *tbl_name, int cpu)
 {
-	int ret, nf, i;
+	int ret, nf, i,j=0;
 	u32 *data;
 	struct cpufreq_frequency_table *ftbl;
 
