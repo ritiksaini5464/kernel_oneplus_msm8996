@@ -81,7 +81,6 @@ bool is_zygote_pid(pid_t pid)
 	return atomic_read(&zygote32_pid) == pid ||
 		atomic_read(&zygote64_pid) == pid;
 }
-#define HWCOMPOSER_BIN_PREFIX "/vendor/bin/hw/android.hardware.graphics.composer"
 
 void __register_binfmt(struct linux_binfmt * fmt, int insert)
 {
